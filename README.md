@@ -1,16 +1,33 @@
-# React + Vite
+# Canvas Creator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple basic web app for creating,decorating and designing projects.
 
-Currently, two official plugins are available:
+# Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is an interactive web-based design tool that allows users to create, edit, and save the projects.  
+It enables easy manipulation of shapes, texts, and saving — all directly within the browser.
+It is a responsive and mobile friendly website.
 
-## React Compiler
+# Features
+- 🖌️ Add, move, resize, and rotate shapes on a canvas  
+- 🗂️ Layer management — bring elements to front or back  
+- 💾 Export your final design as an image  
+- ⚡ Real-time rendering and smooth interactions  
+- 🌐 Fully responsive and mobile-friendly UI  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+# Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Frontend:** React, Fabric.js, Tailwind CSS  
+**Backend:** Firebase (Firestore, Authentication)    
+**Other Tools:** Node.js, Git, VS Code  
+
+## 💻 Getting Started
+
+Follow these steps to run the project locally:
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/<your-username>/<repo-name>.git
+cd <repo-name>
