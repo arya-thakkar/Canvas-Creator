@@ -47,11 +47,14 @@ const CanvasPage = () => {
       const docSnap = await getDoc(docRef);
       
       if (docSnap.exists()) {
-        const canvasData = docSnap.data();
-        fabricCanvasRef.current.loadFromJSON(canvasData.objects, () => {
-          fabricCanvasRef.current.renderAll();
-          console.log('Canvas loaded successfully');
-        });
+        const data = docSnap.data();
+        if (data.objects) {
+          const savedData = JSON.parse(data.objects);
+          fabricCanvasRef.current.loadFromJSON(savedData, () => {
+            fabricCanvasRef.current.renderAll();
+            console.log('Canvas loaded successfully');
+          });
+        }
       }
     } catch (error) {
       console.error("Error loading canvas:", error);
@@ -61,13 +64,15 @@ const CanvasPage = () => {
   const saveCanvas = async () => {
     try {
       console.log('Saving canvas:', canvasId);
-      const canvasData = fabricCanvasRef.current.toObject();
+      const canvasData = fabricCanvasRef.current.toJSON();
       const docRef = doc(db, 'canvases', canvasId);
+
       await setDoc(docRef, {
-        objects: canvasData,
-        lastModified: "2025-10-17 10:27:00",
-        createdBy: 'arya-thakkar'
+        objects: JSON.stringify(canvasData),
+        lastModified: new Date().toISOString(),
+        createdBy: 'arya-thakkar',
       });
+
       console.log('Canvas saved successfully!');
       alert('Canvas saved successfully!');
     } catch (error) {
@@ -108,12 +113,11 @@ const CanvasPage = () => {
     }
   };
 
-  // Test function to verify Firebase connection
   const testFirebaseConnection = async () => {
     try {
       const testRef = doc(db, 'test_connection', 'test_doc');
       await setDoc(testRef, {
-        timestamp: "2025-10-17 10:27:00",
+        timestamp: new Date().toISOString(),
         user: 'arya-thakkar',
         status: 'test_successful'
       });
