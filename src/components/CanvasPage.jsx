@@ -67,34 +67,54 @@ const CanvasPage = () => {
 
   const loadCanvasData = async () => {
     try {
-      const docRef = doc(db, 'canvases', canvasId);
+      console.log("Loading canvas:", canvasId);
+      const docRef = doc(db, "canvases", canvasId);
       const docSnap = await getDoc(docRef);
+
       if (docSnap.exists()) {
         const data = docSnap.data();
-        fabricCanvasRef.current.loadFromJSON(data.canvas, () => {
-          fabricCanvasRef.current.renderAll();
-        });
+
+        if (data.canvasData) {
+          fabricCanvasRef.current.loadFromJSON(data.canvasData, () => {
+            fabricCanvasRef.current.renderAll();
+            fabricCanvasRef.current.requestRenderAll();
+            console.log("Canvas loaded successfully!");
+          });
+        } else {
+          console.warn("No canvasData found in document.");
+        }
+      } else {
+        console.warn("No document found for this canvasId.");
       }
     } catch (error) {
       console.error("Error loading canvas:", error);
     }
   };
 
+
+
   const saveCanvas = async () => {
     try {
-      const canvasData = fabricCanvasRef.current.toObject();
-      const docRef = doc(db, 'canvases', canvasId);
+      const canvasData = fabricCanvasRef.current.toJSON();
+      const cleanData = JSON.parse(JSON.stringify(canvasData));
+
+      const docRef = doc(db, "canvases", canvasId);
       await setDoc(docRef, {
-        canvas: canvasData,
+        canvasData: cleanData,
         lastModified: new Date().toISOString(),
-        createdBy: 'arya-thakkar'
+        createdBy: "arya-thakkar",
       });
-      alert('Canvas saved successfully!');
+
+
+      console.log("Canvas saved successfully!");
+      alert("Canvas saved successfully!");
     } catch (error) {
-      alert('Error saving canvas');
       console.error("Error saving canvas:", error);
+      alert("Error saving canvas — check console");
     }
   };
+
+
 
   const addRectangle = () => {
     disablePenIfActive();

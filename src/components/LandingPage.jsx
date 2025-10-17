@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import '../styles/LandingPage.css';
-import DarkVeil from './background';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -14,10 +13,6 @@ const LandingPage = () => {
 
   return (
     <div className="landing-container">
-      <div className="background">
-        <DarkVeil />
-      </div>
-
       <div className="landing-content">
         <h1>Welcome to Canvas Creator</h1>
         <p>Create and save your canvas designs</p>
